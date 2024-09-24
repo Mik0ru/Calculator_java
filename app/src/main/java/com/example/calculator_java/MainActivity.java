@@ -1,7 +1,9 @@
 package com.example.calculator_java;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -60,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onEqualClick(View view) {
+        Button invisibleButton = findViewById(R.id.invisible_button);
         second_num = Double.parseDouble((textView.getText().toString().replace(",", ".")));
         if (isPlus) {
             result = first_num +second_num;
@@ -87,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
         }
         first_num = result;
         second_num = (double) 0;
-
+        invisibleButton.setVisibility(View.VISIBLE);
 
     }
     public void onPlusMinusCLick(View view){
@@ -106,5 +109,10 @@ public class MainActivity extends AppCompatActivity {
         } else {
             textView.setText(String.valueOf(result).replace(".",","));
         }
+    }
+    public void onInvisibleButtonClick(View view) {
+        Intent intent = new Intent(MainActivity.this, SecondActivity.class);
+        intent.putExtra("key1", result);
+        startActivity(intent);
     }
 }
